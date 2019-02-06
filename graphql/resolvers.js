@@ -4,7 +4,7 @@ const jaco = {
     age: 34,
     gender: "man"
 }
-const people = [
+let people = [
     jaco,
     {
         id: 2,
@@ -25,11 +25,38 @@ const getById = id => {
     return filteredPeople[0]
 }
 
+const addPerson = (name, age, gender) => {
+    const person = {
+        name, 
+        age, 
+        gender,
+        id: people.length + 1
+    }
+    people.push(person)
+    return person
+}
+
+const removePerson = id => {
+    try {
+        const idx = people.findIndex(person => id === person.id)
+        const person = people[idx]
+        people.splice(idx, 1)
+        return true
+    } catch(e) {
+        console.log(e)
+        return false
+    } 
+}
+
 const resolvers = {
     Query: {
         people: () => people,
         //person: (_, args) => args.id ~~
         person: (_, {id}) => getById(id)
+    },
+    Mutation: {
+        addPerson: (_, {name, age, gender}) => addPerson(name, age, gender),
+        removePerson: (_, {id}) => removePerson(id)
     }
 }
 
