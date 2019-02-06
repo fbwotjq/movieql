@@ -1,5 +1,5 @@
-# movieql
-Movie api with graphql
+# personql
+Person api with graphql
 
 ## command
  - make project => mkdir movieql && cd movieql/ && yarn init && code . && git init 
